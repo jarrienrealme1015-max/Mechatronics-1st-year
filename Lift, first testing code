@@ -1,0 +1,36 @@
+int dig1 = 8;
+int dig2 = 9;
+int dig3 = 2;
+
+int MSD = 0;
+int Middle = 0;
+int LSD = 0;
+
+void setup(){
+// Set up buttton pins as inputs
+  pinMode(dig1,INPUT);
+  pinMode(dig2,INPUT);
+  pinMode(dig3,INPUT);
+// Set up the display output
+  pinMode(14, OUTPUT);
+  pinMode(13, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop () {
+// Read the 3 Black buttons 
+  LSD = digitalRead (dig1);
+  Middle= digitalRead (dig2);
+  MSD = digitalRead (dig3);
+//convert to decimal to binary
+  int flooreg= LSD + (Middle<<1) + (MSD<<2);
+  
+//Show floor number on Serial Monitor
+  Serial.println (flooreg);
+// Control the display for floor 0 to 3
+  if (flooreg <= 3){
+    digitalWrite (14,HIGH);
+    digitalWrite (14,LOW);
+  }
+}
